@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+    public function index()
+    {
+        return view('dashboard');
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -21,27 +24,78 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $request->validate([
+            'firstName' => ['required', 'string', 'min:3', 'max:20'],
+            'lastName' => ['required', 'string', 'min:3', 'max:20'],
+            'username' => ['required', 'alpha_num:ascii', 'min:3', 'max:20'],
+            'mobileNumber' => ['required', 'string', 'min:10', 'max:10'],
+            'dob' => ['required', Rule::date()->format('Y-m-d')],
+            'gender' => ['required', 'string', 'max:10']
+        ]);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        $request->user()->firstName = $request->firstName;
+        $request->user()->lastName = $request->lastName;
+        $request->user()->username = $request->username;
+        $request->user()->mobileNumber = $request->mobileNumber;
+        $request->user()->dob = $request->dob;
+        $request->user()->gender = $request->gender;
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect()->route('profile.edit')->with('message', 'User information updated successfully!');
     }
 
-    /**
-     * Delete the user's account.
-     */
+    public function address(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'city' => ['required', 'string', 'min:3', 'max:20'],
+            'state' => ['required', 'string', 'min:3', 'max:20'],
+            'country' => ['required', 'string', 'min:3', 'max:20'],
+            'zip' => ['required', 'string', 'min:3', 'max:20'],
+            'addressline' => ['required', 'string', 'min:3', 'max:50']
+        ]);
+
+        $request->user()->city = $request->city;
+        $request->user()->state = $request->state;
+        $request->user()->country = $request->country;
+        $request->user()->zip = $request->zip;
+        $request->user()->addressline = $request->addressline;
+
+        $request->user()->save();
+
+        return redirect()->route('profile.edit')->with('message', 'User address updated successfully!');
+    }
+
+    public function image(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        if (isset($request->user()->image)) {
+            Storage::disk('public')->delete($request->user()->image);
+        }
+
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            $newName = time() . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            Storage::disk('public')->put($newName, file_get_contents($image));
+        }
+
+        $request->user()->image = $newName;
+
+        $request->user()->save();
+
+        return redirect()->route('profile.edit')->with('message', 'User image updated successfully!');
+    }
+
     public function destroy(Request $request): RedirectResponse
     {
+        Storage::disk('public')->delete($request->user()->image);
+
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ]);

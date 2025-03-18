@@ -1,36 +1,89 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="author" content="sumanta ghosh" />
+        <meta name="description" content="best travel service in your country" />
+        <meta name="keywords" content="travel, foreign trip, international vacation" />
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <!--==================== favicon ====================-->
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}" />
+        <link rel="manifest" href="{{ asset('images/site.webmanifest') }}" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="theme-color" content="#000000" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <!--==================== canonical ====================-->
+        <link rel="canonical" href="http://example.com/home" />
 
-        <!-- Scripts -->
+        <!--==================== fontawesome cdn ====================-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+
+        <title>{{ $title }} | {{ config('app.name', 'E-Commerce') }}</title>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+    <body>
+        <nav class="bg-blue-800 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold">Logo</a>
+                <ul class="flex space-x-4">
+                    @guest
+                        <li><a href="{{ route('welcome') }}">Home</a></li>
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @endguest
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+                    @auth('web')
+                        <li><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+                        <li><a href="order.php">Orders</a></li>
+                        <li><a href="order.php">Reviews</a></li>
+                        <li><a href="order.php">Cart</a></li>
+                        <li><a href="order.php">Contact Us</a></li>
+                        <li><a href="{{ route('logout') }}">Logout</a></li>
+                    @endauth
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+                    {{-- @auth('admin')
+                        <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ route('admin.profile.edit') }}">Profile</a></li>
+                        <div class="dropdown inline-block relative">
+                            <button class="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+                                <span class="mr-1">Manage</span>
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Categories</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Colors</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Sizes</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Products</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Reviews</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Orders</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Coupons</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Banners</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Contact Us</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.users') }}">Users</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.admins') }}">Admins</a></li>
+                            </ul>
+                        </div>
+                        <li><a href="{{ route('admin.logout') }}">Logout</a></li>
+                    @endauth --}}
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            {{ $slot }}
+        </main>
+
+        <!--==================== add noscript ====================-->
+        <noscript>please enable JavaScript in your website.</noscript>
     </body>
 </html>
