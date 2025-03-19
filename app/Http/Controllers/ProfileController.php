@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,9 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $banners = Banner::all()->where('status', 'active');
+
+        return view('dashboard', ['banners' => $banners]);
     }
 
     public function edit(Request $request): View
