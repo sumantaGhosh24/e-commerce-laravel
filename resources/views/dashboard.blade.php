@@ -10,82 +10,55 @@
             </div>
         </div>
     @endif
+    <div class="flex items-center justify-between gap-3">
+        @foreach ($banners as $banner)
+            <div class="swiper-slide">
+                <div class="flex flex-col items-start p-5 rounded gap-5 h-[250px] w-full" style="background: url('{{ asset('storage/' . $banner->image) }}') center center/cover no-repeat;">
+                    <span class="text-3xl font-semibold text-blue-600">{{ $banner->heading1 }}</span>
+                    <span class="text-xl text-blue-400">{{ $banner->heading2 }}</span>
+                    <a href="{{ $banner->btn_link }}" class="w-fit bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors uppercase" target="blank">{{ $banner->btn_txt }}</a>
+                </div>
+            </div>                        
+        @endforeach
+    </div>
 
-    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <style>
-        .swiper-wrapper {
-            width: 100%;
-            height: max-content !important;
-            padding-bottom: 64px !important;
-            -webkit-transition-timing-function: linear !important;
-            transition-timing-function: linear !important;
-            position: relative;
-        }
-
-        .swiper-pagination-bullet {
-            background: #4f46e5;
-        }
-    </style>
-
-    {{-- FIXME: carousel not working --}}
-    <div class="w-full relative">
-        <div class="swiper default-carousel swiper-container">
-            <div class="swiper-wrapper" id="slides"></div>
-            <div class="flex items-center gap-8 lg:justify-start justify-center">
-                <button id="slider-button-left"
-                    class="swiper-button-prev group !p-2 flex justify-center items-center border border-solid border-blue-600 !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8 !left-5 hover:bg-blue-600 "
-                    data-carousel-prev>
-                    <svg class="h-5 w-5 text-blue-600 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" stroke="currentColor" stroke-width="1.6"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-                <button id="slider-button-right"
-                    class="swiper-button-next group !p-2 flex justify-center items-center border border-solid border-blue-600 !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8  !right-5 hover:bg-blue-600"
-                    data-carousel-next>
-                    <svg class="h-5 w-5 text-blue-600 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" stroke="currentColor" stroke-width="1.6"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-            </div>
-            <div class="swiper-pagination">
-                @foreach ($banners as $banner)
-                    <div class="swiper-slide">
-                        <div class="h-96 flex flex-col justify-center items-center gap-5" style="background: url('{{ asset('storage/' . $banner->image) }}') center center/cover no-repeat;">
-                            <img src="{{ asset('storage/' . $banner->image) }}" alt="banner" class="h-48 w-full rounded-md" />
-                            <span class="text-3xl font-semibold text-blue-600">{{ $banner->heading1 }}</span>
-                            <span class="text-xl text-blue-400">{{ $banner->heading2 }}</span>
-                            <a href="{{ $banner->btn_link }}" class="w-fit bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors uppercase">{{ $banner->btn_txt }}</a>
+    <div class="flex justify-center items-center">
+        <div class="rounded-lg shadow-md p-8 shadow-black w-[90%] my-20">
+            <form action="{{ route('dashboard') }}">
+                <div class="flex items-center justify-between gap-2 flex-col md:flex-row">
+                    <input type="text" class="w-full px-4 py-2 rounded-md border border-gray-300" placeholder="Search product" name="title" id="title" value="" />
+                    <select name="category_id" id="category_id" class="mb-2 w-full px-4 py-2 rounded-md border border-gray-300">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                    <input type="text" class="w-full px-4 py-2 rounded-md border border-gray-300" placeholder="Search product" name="min_price" id="min_price" value="0" />
+                    <input type="text" class="w-full px-4 py-2 rounded-md border border-gray-300" placeholder="Search product" name="max_price" id="max_price" value="1000" />
+                    <select name="sort_by" id="sort_by" class="mb-2 w-full px-4 py-2 rounded-md border border-gray-300"">
+                        <option value="created_at">Created At</option>
+                        <option value="price">Price</option>
+                    </select>
+                    <select name="sort_order" id="sort_order" class="mb-2 w-full px-4 py-2 rounded-md border border-gray-300">
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                    <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-200">Search Product</button>
+                </div>
+            </form>
+            <div class="flex flex-col gap-3 my-5">
+                @foreach ($products as $product)
+                    <a href="{{ route('product.details', ['id' => $product->id])}}" class='my-5'>
+                        <div class="shadow-black shadow-md rounded p-5">
+                            <h2 class="capitalize text-2xl font-bold">{{ $product->title }}</h2>
+                            <p class="my-3">{{ $product->description }}</p>
+                            <p><strong>MRP:</strong> ${{ $product->mrp }}</p>
+                            <p><strong>Price:</strong> ${{ $product->price }}</p>
+                            <p class="mt-3"><strong>Category:</strong> {{ $product->category->name }}</p>
                         </div>
-                    </div>                        
+                    </a>
                 @endforeach
             </div>
+            {{ $products->links() }}
         </div>
     </div>
-
-    <div class='flex items-center justify-center h-screen'>
-        <div class='h-[500px] w-[60%] gap-5 shadow-md rounded-md shadow-black text-center'>
-            <h1 class='text-4xl font-bold capitalize mt-36'>Welcome to laravle e-commerce website</h1>
-            <p class='text-xl my-20'>This is a advanced laravel e-commerce website</p>
-        </div>
-    </div>
-
-    <script>
-        var swiper = new Swiper(".default-carousel", {
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: false,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-    </script>
 </x-app-layout>

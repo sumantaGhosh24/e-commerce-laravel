@@ -61,9 +61,7 @@
                             </button>
                             <ul class="dropdown-menu absolute hidden text-gray-700 pt-1">
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.categories') }}">Categories</a></li>
-                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Colors</a></li>
-                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Sizes</a></li>
-                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Products</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.products') }}">Products</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Reviews</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Orders</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Coupons</a></li>
