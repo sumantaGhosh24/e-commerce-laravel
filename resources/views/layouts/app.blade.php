@@ -44,7 +44,7 @@
                         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
                         <li><a href="order.php">Orders</a></li>
                         <li><a href="{{ route('reviews') }}">Reviews</a></li>
-                        <li><a href="order.php">Cart</a></li>
+                        <li><a href="{{ route('cart') }}">Cart</a></li>
                         <li><a href="{{ route('contact.create') }}">Contact Us</a></li>
                         <li><a href="{{ route('logout') }}">Logout</a></li>
                     @endauth

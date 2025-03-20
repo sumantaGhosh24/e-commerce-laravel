@@ -61,13 +61,11 @@
                                     <td class="py-3 px-6 text-left">{{ $attribute->mrp }}</td>
                                     <td class="py-3 px-6 text-left">{{ $attribute->price }}</td>
                                     <td class="py-3 px-6 text-left flex items-center gap-3">
-                                        {{-- <form action="{{ route('admin.product.attribute.remove', ['id' => $attribute->id, 'attributeId' => $attribute->id]) }}" method="POST">
+                                        <form action="{{ route('cart.add', ['product_id' => $product->id, 'attribute_id' => $attribute->id, 'quantity' => 1]) }}" method="POST">
                                             @csrf
-                                            @method('put')
-        
-                                            <button type="submit" class="w-fit bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors disabled:bg-red-200">Delete</button>
-                                        </form> --}}
-                                        <button type="button" class="w-fit bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-200">Add Cart</button>
+                                            
+                                            <button type="submit" class="w-fit bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-200">Add Cart</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
