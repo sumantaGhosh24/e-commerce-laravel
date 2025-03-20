@@ -10,6 +10,7 @@ use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\ProductImage;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         // ProductImage::factory(100)->create();
         // ProductAttribute::factory(100)->create();
         // Contact::factory(50)->create();
-        Coupon::factory(3)->create();
+        // Coupon::factory(3)->create();
+        // Review::factory(50)->create();
     }
 }

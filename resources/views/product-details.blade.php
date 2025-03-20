@@ -77,6 +77,43 @@
                     </table>
                 </div>
             </div>
+            <div class="shadow-md shadow-black p-5 rounded my-10">
+                <div class="rounded-lg shadow-md p-8 shadow-black w-[60%]">
+                    <h1 class="text-3xl font-semibold mb-4">Create Review</h1>
+                    <form method="POST" action="{{ route('review.store', ['id' => $product->id]) }}">
+                        @csrf
+        
+                        <div>
+                            <x-input-label for="rating" :value="__('Rating')" />
+                            <x-text-input id="rating" class="" type="text" name="rating" :value="old('rating')" required autofocus autocomplete="rating" />
+                            <x-input-error :messages="$errors->get('rating')" class="mt-2" />
+                        </div>
+        
+                        <div>
+                            <x-input-label for="review" :value="__('Message')" />
+                            <x-text-input id="review" class="" type="text" name="review" :value="old('review')" required autofocus autocomplete="review" />
+                            <x-input-error :messages="$errors->get('review')" class="mt-2" />
+                        </div>
+        
+                        <x-primary-button class="mt-4 max-w-fit">{{ __('Create Review') }}</x-primary-button>
+                    </form>
+                </div>
+            </div>
+            <div class="shadow-md shadow-black p-5 rounded my-10">
+                <div class="overflow-x-scroll">
+                    @forelse ($product->reviews as $review)
+                        <div class="bg-gray-200 p-3 my-4 rounded space-y-3">
+                            <h2 class="text-2xl font-bold">Rating: {{ $review->rating }}</h2>
+                            <h2 class="text-xl font-bold capitalize">{{ $review->review }}</h2>
+                            <h4>User name: {{ $review->user->username }}</h4>
+                            <h4>User email: {{ $review->user->email }}</h4>
+                            <h5 class="text-xs font-light">{{ $review->created_at }}</h5>
+                        </div>
+                    @empty
+                        <h2 class="text-2xl font-bold my-5">No Reviews Found!</h2>
+                    @endforelse
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>
