@@ -12,3 +12,4 @@ require __DIR__ . '/categories.php';
 require __DIR__ . '/banners.php';
 require __DIR__ . '/products.php';
 require __DIR__ . '/contacts.php';
+require __DIR__ . '/coupons.php';

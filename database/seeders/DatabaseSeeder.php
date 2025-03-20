@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Contact;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\ProductImage;
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         // Product::factory(25)->create();
         // ProductImage::factory(100)->create();
         // ProductAttribute::factory(100)->create();
-        Contact::factory(50)->create();
+        // Contact::factory(50)->create();
+        Coupon::factory(3)->create();
     }
 }
