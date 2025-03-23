@@ -15,3 +15,4 @@ require __DIR__ . '/contacts.php';
 require __DIR__ . '/coupons.php';
 require __DIR__ . '/reviews.php';
 require __DIR__ . '/carts.php';
+require __DIR__ . '/orders.php';

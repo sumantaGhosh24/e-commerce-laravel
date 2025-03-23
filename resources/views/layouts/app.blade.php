@@ -42,7 +42,7 @@
                     @auth('web')
                         <li><a href="{{ route('dashboard') }}">Home</a></li>
                         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
-                        <li><a href="order.php">Orders</a></li>
+                        <li><a href="{{ route('orders') }}">Orders</a></li>
                         <li><a href="{{ route('reviews') }}">Reviews</a></li>
                         <li><a href="{{ route('cart') }}">Cart</a></li>
                         <li><a href="{{ route('contact.create') }}">Contact Us</a></li>
@@ -63,7 +63,7 @@
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.categories') }}">Categories</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.products') }}">Products</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.reviews') }}">Reviews</a></li>
-                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="manage-category.php">Orders</a></li>
+                                <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.orders') }}">Orders</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.coupons') }}">Coupons</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.banners') }}">Banners</a></li>
                                 <li><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="{{ route('admin.contacts') }}">Contact Us</a></li>

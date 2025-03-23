@@ -3,6 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
+use App\Models\Banner;
+use App\Models\Category;
+use App\Models\Contact;
+use App\Models\Coupon;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\ProductAttribute;
+use App\Models\ProductImage;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +26,21 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $users = User::count();
+        $admins = Admin::count();
+        $categories = Category::count();
+        $banners = Banner::count();
+        $products = Product::count();
+        $product_images = ProductImage::count();
+        $product_attributes = ProductAttribute::count();
+        $contacts = Contact::count();
+        $coupons = Coupon::count();
+        $reviews = Review::count();
+        $orders = Order::count();
+
+        $data = ['users' => $users, 'admins' => $admins, 'categories' => $categories, 'banners' => $banners, 'products' => $products, 'product_images' => $product_images, 'product_attributes' => $product_attributes, 'contacts' => $contacts, 'coupons' => $coupons, 'reviews' => $reviews, 'orders' => $orders];
+
+        return view('admin.dashboard', $data);
     }
 
     public function edit(Request $request): View

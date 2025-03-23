@@ -11,4 +11,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/remove-cart', [CartController::class, 'remove'])->name('cart.remove');
 
     Route::post('/clear-cart', [CartController::class, 'clear'])->name('cart.clear');
+
+    Route::post('/coupon-verify', [CartController::class, 'verify'])->name('cart.coupon');
 });

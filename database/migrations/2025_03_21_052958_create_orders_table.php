@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->string('address');
+            $table->string('city');
+            $table->string('pincode');
+            $table->string('coupon_value');
+            $table->string('coupon_code');
+            $table->decimal('total_price', 10, 2);
+            $table->decimal('net_price', 10, 2);
+            $table->string('paymentResultId');
+            $table->string('paymentResultStatus');
+            $table->string('paymentResultOrderId');
+            $table->string('paymentResultPaymentId');
+            $table->string('paymentResultRazorpaySignature');
+            $table->string('order_status');
+            $table->foreignId('coupon_id')->constrained('coupons')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('orders');
+    }
+};
