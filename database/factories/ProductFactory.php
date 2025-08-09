@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,9 +24,9 @@ class ProductFactory extends Factory
             'mrp' => fake()->randomFloat(2, 10, 1000),
             'price' => fake()->randomFloat(2, 10, 800),
             'meta_title' => fake()->sentence(),
-            'meta_desc' => fake()->paragraph(),
+            'meta_desc' => fake()->sentence(),
             'meta_keyword' => fake()->sentence(),
-            'category_id' => rand(1, 5),
+            'category_id' => fake()->randomElement(Category::all()->pluck('id')->toArray())
         ];
     }
 }

@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => static::$password ??= Hash::make('password'),
             'mobileNumber' => fake()->unique()->phoneNumber(),
-            'image' => '600x400.png',
+            'image' => 'placeholder.png',
             'dob' => fake()->date(),
             'gender' => fake()->randomElement(['Male', 'Female', 'Other']),
             'city' => fake()->city(),

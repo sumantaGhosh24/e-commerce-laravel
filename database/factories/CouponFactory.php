@@ -21,7 +21,6 @@ class CouponFactory extends Factory
             'coupon_value' => fake()->randomFloat(2, 10, 500),
             'coupon_type' => fake()->randomElement(['percent', 'rupee']),
             'cart_min_value' => fake()->randomFloat(2, 10, 2000),
-            'status' => fake()->randomElement(['active', 'deactive']),
         ];
     }
 }

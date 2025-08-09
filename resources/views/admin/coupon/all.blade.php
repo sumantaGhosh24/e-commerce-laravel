@@ -16,8 +16,8 @@
             <h2 class="text-2xl font-bold mb-4 text-center">Manage Coupons</h2>
             <a href="{{ route('admin.coupon.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-200 w-fit">Create Coupon</a>
         </div>
-        <div class="overflow-x-scroll">
-            <table class="min-w-full bg-white rounded-lg shadow-md mx-auto mt-5">
+        <div class="container mx-auto overflow-x-scroll">
+            <table class="bg-white rounded-lg shadow-md mt-5">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">ID</th>

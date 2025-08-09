@@ -18,7 +18,7 @@ class ContactFactory extends Factory
     public function definition(): array
     {
         return [
-            'message' => fake()->paragraph(),
+            'message' => fake()->sentence(),
             'user_id' => fake()->randomElement(User::all()->pluck('id')->toArray()),
         ];
     }

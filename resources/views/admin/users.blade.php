@@ -3,8 +3,8 @@
 
     <div class="pt-8">
         <h2 class="text-2xl font-bold text-center my-5">Manage Users</h2>
-        <div class="w-[100vw] overflow-x-auto">
-            <table class="max-w-[100vw] bg-white rounded-lg shadow-md mx-auto">
+        <div class="container mx-auto overflow-x-auto">
+            <table class="bg-white rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                         <th class="py-3 px-6 text-left">ID</th>

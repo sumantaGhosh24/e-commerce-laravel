@@ -21,8 +21,7 @@ class BannerFactory extends Factory
             'heading2' => fake()->sentence(),
             'btn_txt' => fake()->word(),
             'btn_link' => fake()->url(),
-            'image' => '600x400.png',
-            'status' => fake()->randomElement(['active', 'deactive']),
+            'image' => 'placeholder.png'
         ];
     }
 }

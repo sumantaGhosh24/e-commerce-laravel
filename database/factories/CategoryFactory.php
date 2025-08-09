@@ -18,8 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'image' => '600x400.png',
-            'status' => fake()->randomElement(['active', 'deactive']),
+            'image' => 'placeholder.png'
         ];
     }
 }
